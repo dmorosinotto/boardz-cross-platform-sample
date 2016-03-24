@@ -49,8 +49,24 @@
         gulp.task('[private-web]:copy-angular2-scripts', function () {
             return gulp.src(config.source.files.angular2)
                 .pipe(concat(config.targets.angular2MinJs))
-                //.pipe(uglify())
                 .pipe(gulp.dest(path.join(config.targets.buildFolder, 'scripts/')));
+        });
+
+        gulp.task('[private-web]:copy-angular2-modal-scripts', function () {
+            var builder = new Builder({
+                baseURL: config.source.files.angular2Modal.base,
+                paths: {
+                    '*': '*.js'
+                },
+                meta: {
+                    'angular2/*': {
+                        build: false
+                    }
+                }
+            });
+
+            return builder.bundle(path.basename(config.source.files.angular2Modal.entryPoint, '.js'),
+                path.join(config.targets.buildFolder, 'scripts/', config.source.files.angular2Modal.entryPoint));
         });
 
         gulp.task('[private-web]:copy-system-setup-script', function () {
@@ -125,6 +141,7 @@
                 [
                     '[private-web]:bundle-vendor-scripts',
                     '[private-web]:copy-angular2-scripts',
+                    '[private-web]:copy-angular2-modal-scripts',
                     '[private-web]:copy-system-setup-script',
                     '[private-web]:copy-cordova-script',
                     '[private-web]:copy-shim',

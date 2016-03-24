@@ -15,12 +15,14 @@ import {GeoLocation} from '../../models/geoLocation';
 import {LoginService} from '../../services/loginService';
 import {Notification} from '../../models/notification';
 import {NotificationType} from '../../models/notificationType';
+import {Modal} from 'angular2-modal';
 
 @Component({
     selector: 'gameDetail',
     directives: [LocateItComponent, PictureItComponent],
     templateUrl: 'app/components/games/details.html',
-    inputs: ['game']
+    inputs: ['game'],
+    providers: [Modal]
 })
 @NeedsAuthentication()
 export class GameDetailsComponent implements OnInit {

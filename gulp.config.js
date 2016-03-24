@@ -76,7 +76,11 @@ module.exports = {
                 './node_modules/angular2/bundles/angular2.dev.js',
                 './node_modules/angular2/bundles/http.dev.js',
                 './node_modules/angular2/bundles/router.dev.js'
-            ]
+            ],
+            angular2Modal: { 
+                base: './node_modules/angular2-modal/dist/',
+                entryPoint: 'angular2-modal.js'
+            }
         }
     },
     ts: {
