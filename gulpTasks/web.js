@@ -156,7 +156,7 @@
             return watch(config.source.files.app.everything, batch(function (events, done) {
                 console.log(arguments);
 
-                runSequence('[private-web]:copy-system-setup-script', '[private-web]:copy-app-html', '[private-web]:build-app-scripts', done);
+                runSequence('[private-web]:copy-system-setup-script', '[private-web]:copy-app-html', '[private-web]:build-app-scripts', '[private-web]:copy-template', done);
             }));
         }
     }
