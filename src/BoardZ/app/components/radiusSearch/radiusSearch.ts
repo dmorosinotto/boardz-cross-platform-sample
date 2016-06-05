@@ -1,5 +1,5 @@
-import {Component, OnInit} from 'angular2/core';
-import {DecimalPipe} from 'angular2/common';
+import {Component, OnInit} from '@angular/core';
+import {DecimalPipe} from '@angular/common';
 
 import {GeoLocation} from '../../models/geoLocation';
 import {GeolocationService} from '../../services/geolocationService';

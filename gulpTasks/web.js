@@ -52,6 +52,11 @@
                 //.pipe(uglify())
                 .pipe(gulp.dest(path.join(config.targets.buildFolder, 'scripts/')));
         });
+        
+        gulp.task('[private-web]:copy-ng2rc1-scripts', function () {
+            return gulp.src(config.source.files.ng2rc1)
+                .pipe(gulp.dest(path.join(config.targets.buildFolder, 'scripts/ng2rc1/')));
+        });
 
         gulp.task('[private-web]:copy-system-setup-script', function () {
             return gulp.src(config.source.files.systemSetupScript)
@@ -123,7 +128,8 @@
                 'clean',
                 [
                     '[private-web]:bundle-vendor-scripts',
-                    '[private-web]:copy-angular2-scripts',
+                    //'[private-web]:copy-angular2-scripts',
+                    '[private-web]:copy-ng2rc1-scripts',
                     '[private-web]:copy-system-setup-script',
                     '[private-web]:copy-cordova-script',
                     '[private-web]:copy-shim',

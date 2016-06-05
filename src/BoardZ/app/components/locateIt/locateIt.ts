@@ -1,7 +1,7 @@
 ///<reference path="../../../../../typings/main/ambient/leaflet/leaflet.d.ts" />
 
-import {Component, Output, OnInit, EventEmitter} from 'angular2/core';
-import {JsonPipe} from 'angular2/common';
+import {Component, Output, OnInit, EventEmitter} from '@angular/core';
+import {JsonPipe} from '@angular/common';
 
 import {GeoLocation} from '../../models/geoLocation';
 import {GeolocationService} from '../../services/geolocationService';

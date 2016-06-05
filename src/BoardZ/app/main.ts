@@ -10,12 +10,12 @@ import 'signalr/signalr';
 import 'leaflet/leaflet';
 import 'fastclick/fastclick';
 
-///<reference path="../../../node_modules/angular2/typings/browser.d.ts"/>
 
-import {bootstrap} from 'angular2/platform/browser';
-import {ComponentRef, provide, enableProdMode} from 'angular2/core';
-import {ROUTER_PROVIDERS, LocationStrategy, HashLocationStrategy} from 'angular2/router';
-import {HTTP_PROVIDERS} from 'angular2/http';
+import {bootstrap} from '@angular/platform-browser-dynamic';
+import {ComponentRef, provide, enableProdMode} from '@angular/core';
+import {ROUTER_PROVIDERS} from '@angular/router-deprecated';
+import {LocationStrategy, HashLocationStrategy} from '@angular/common';
+import {HTTP_PROVIDERS} from '@angular/http';
 
 import {BoardzAppComponent} from './app';
 import {TokenService} from './services/tokenService';
@@ -31,7 +31,7 @@ bootstrap(BoardzAppComponent, [
     provide(LocationStrategy, { useClass: HashLocationStrategy }),
     provide(LogService, { useClass: LogService }),
     TokenService,
-]).then((appRef: ComponentRef) => {
+]).then((appRef: ComponentRef<any>) => {
     // Store a reference to the injector workaround for Dependency Injection in Router lifecycle hook
     appInjector(appRef.injector);
 });

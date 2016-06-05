@@ -1,5 +1,5 @@
-import {Injectable, ApplicationRef} from 'angular2/core';
-import {Router} from 'angular2/router';
+import {Injectable, ApplicationRef} from '@angular/core';
+import {Router} from '@angular/router-deprecated';
 import {PlatformInformationService} from './platformInformationService';
 
 declare var require;
