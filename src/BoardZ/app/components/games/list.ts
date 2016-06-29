@@ -1,17 +1,18 @@
-import {Component, OnInit} from 'angular2/core';
-import {Router, ROUTER_DIRECTIVES} from 'angular2/router';
-
-import {NeedsAuthentication} from '../../decorators/needsAuthentication';
+import {Component, OnInit} from '@angular/core';
+import {Router, ROUTER_DIRECTIVES} from '@angular/router-deprecated';
 import {Game} from '../../models/game';
 import {GamesService} from '../../services/gamesService';
 import {NotificationService} from '../../services/notificationService';
+import {NeedsAuthentication} from '../../decorators/needsAuthentication';
 
-@Component({
-    selector: 'gamelist',
-    directives: [ROUTER_DIRECTIVES],
-    templateUrl: 'app/components/games/list.html'
-})
 @NeedsAuthentication()
+@Component({
+    moduleId: module.id,
+    selector: 'game-list',
+    directives: [ROUTER_DIRECTIVES],
+    templateUrl: 'list.html'
+})
+
 export class GameListComponent implements OnInit {
     public games: Game[];
 

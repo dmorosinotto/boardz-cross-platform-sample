@@ -1,6 +1,5 @@
-import {Component, AfterViewInit} from 'angular2/core';
-import {ROUTER_DIRECTIVES, RouteConfig} from 'angular2/router';
-
+import {Component, AfterViewInit} from '@angular/core';
+import {ROUTER_DIRECTIVES, RouteConfig} from '@angular/router-deprecated';
 import {LoginComponent} from './components/login/login';
 import {DashboardComponent} from './components/dashboard/dashboard';
 import {SidebarComponent} from './components/sidebar/sidebar';
@@ -15,20 +14,24 @@ import {SignalRService} from './services/signalrService';
 import {LoginService} from './services/loginService';
 import {NotificationService} from './services/notificationService';
 import {UiNotificationService} from './services/uiNotificationService';
-import {NativeIntegrationService} from "./services/nativeIntegrationService";
+import {NativeIntegrationService} from './services/nativeIntegrationService';
+import {IBoardZAppWindow} from './interfaces/boardzAppWindow';
+
+declare var window: IBoardZAppWindow;
 
 @Component({
+    moduleId: module.id,
     selector: 'boardz-app',
+    directives: [ROUTER_DIRECTIVES, HeaderComponent, SidebarComponent],
     providers: APP_SERVICES,
-    directives: [ROUTER_DIRECTIVES, SidebarComponent, HeaderComponent],
-    templateUrl: 'app/app.html'
+    templateUrl: 'app.html'
 })
 @RouteConfig([
-    { path: '/', component: DashboardComponent, name: 'Dashboard', useAsDefault: true },
-    { path: '/login', component: LoginComponent, name: 'Login' },
-    { path: '/notifications', component: NotificationsComponent, name: 'Notifications' },
-    { path: '/games/...', component: GamesComponent, name: 'Games', data: { displayName: 'Games' } },
-    { path: '/radiusSearch', component: RadiusSearchComponent, name: 'RadiusSearch' }
+    { path: '/', name: 'Dashboard', useAsDefault: true, component: DashboardComponent },
+    { path: '/login', name: 'Login', component: LoginComponent },
+    { path: '/notifications', name: 'Notifications', component: NotificationsComponent },
+    { path: '/games/...', name: 'Games', component: GamesComponent, data: { displayName: 'Games' } },
+    { path: '/radiussearch', name: 'RadiusSearch', component: RadiusSearchComponent }
 ])
 export class BoardzAppComponent implements AfterViewInit {
     constructor(private _signalRService: SignalRService,
@@ -39,10 +42,9 @@ export class BoardzAppComponent implements AfterViewInit {
                 private _logService: LogService) {
         _logService.maximumLogLevel = LogLevel.Verbose;
         _uiNotificationService.subscribeToNotifications();
-        _nativeIntegrationService.init();
     }
 
-    ngAfterViewInit(): any {
+    public ngAfterViewInit(): any {
         if (window.initAdminLTE) {
             window.initAdminLTE();
         }
@@ -54,40 +56,7 @@ export class BoardzAppComponent implements AfterViewInit {
         this._signalRService.someoneJoinedAGame.subscribe(message => {
             this._notificationService.notifyInformation(message);
         });
+
+        this._nativeIntegrationService.registerNavigationHook();
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-interface BoardZAppWindow extends Window {
-    initAdminLTE(): void;
-}
-
-declare var window: BoardZAppWindow;

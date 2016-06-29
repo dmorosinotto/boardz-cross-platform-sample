@@ -14,9 +14,9 @@
 
         gulp.task('[private-electron]:clean', function () {
             return del([
-                path.join(config.targets.electronFolder, 'www'),
-                path.join(config.targets.electronFolder, 'build')
-            ]);
+                path.join(config.targets.electronFolder, 'www', '/**/*'),
+                path.join(config.targets.electronFolder, 'build', '/**/*')
+            ], {force:true});
         });
 
         gulp.task('[private-electron]:copy-source', function () {
@@ -32,7 +32,7 @@
         function buildAppFor(targetPlatform, target) {
             return gulp.src(path.join(config.targets.electronFolder, 'www', '**', '*'))
                 .pipe(electron({
-                    version: '1.1.0',
+                    version: '1.2.5',
                     platform: targetPlatform,
                     arch: 'x64',
                     companyName: 'Thinktecture AG',

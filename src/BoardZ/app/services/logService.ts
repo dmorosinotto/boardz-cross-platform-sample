@@ -1,5 +1,4 @@
-import {Injectable} from 'angular2/core';
-
+import {Injectable} from '@angular/core';
 import {LogLevel} from '../models/logLevel';
 
 @Injectable()
@@ -55,6 +54,5 @@ export class LogService {
 
     protected formatMessage(logLevel: LogLevel, message: string): string {
         return this.getIsoDate() + ' [' + this.getLogLevelName(logLevel) + ']: ' + message;
-        ;
     }
 }
